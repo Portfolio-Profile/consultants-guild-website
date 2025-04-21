@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            user-select: none;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 0;
+            background-color: #333;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #666;
+            border-radius: 5px;
+        }
+
+        body {
+            position: relative;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Basic styles for the website */
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+        .wrapper {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Slideshow container */
+        .box {
+            display: flex;
+        }
+
+        .img-logo {
+            position: relative;
+            right: 10%;
+            width: 15%;
+        }
+
+        .img-logo img {
+            width: 150%;
+            margin-top: 150%;
+            margin-right: -7px;
+            background: black;
+            opacity: 0.8;
+        }
+
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        /* Centering images */
+        .slideshow-container img {
+            display: block;
+            margin-left: 31px;
+            border-radius: 10px;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* Slideshow caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 31% 18%;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            margin: -15px 32px;
+        }
+
+        /* Dot indicators */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        /* Active dot */
+        .active {}
+
+        /* Positioning the dot container at the bottom */
+        .dot-container {
+            margin: 0px 32px;
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+        }
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            background-color: #ffffff18;
+            top: 0;
+            width: 100%;
+            height: 4.5rem;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            margin-right: 0.3rem;
+            padding: 0 20px;
+            transition: 0.3s ease;
+        }
+
+        header.active1 {
+            background-color: #a1a1a196;
+            height: 3rem;
+        }
+
+        header .logo {
+            color: #fff;
+            font-family: "Ubuntu";
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.4rem;
+            text-decoration: none;
+            margin-left: 1rem;
+            z-index: 99999;
+        }
+
+        header .menu {
+            width: fit-content;
+            height: 100%;
+            display: flex;
+            transition: 0s;
+        }
+
+        header .menu-shadow {
+            display: none;
+        }
+
+        header .menu .close-menu {
+            display: none;
+        }
+
+        .menu a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 0.2rem;
+            padding: 0rem 0.5rem;
+            height: 100%;
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 1px;
+        }
+
+        header .menu a:hover,
+        header .menu a.active {
+            font-weight: 600;
+            color: crimson;
+            transition: color 0.1s ease-in;
+        }
+
+        header.active1 .menu a:hover,
+        header.active1 .menu a.active {
+            background-color: crimson;
+            color: #fff;
+        }
+
+        header .show-bar {
+            display: none;
+            position: absolute;
+            right: 2rem;
+            font-size: 1.3rem;
+            padding: 0.5rem 0.7rem;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        header .show-bar:hover {
+            background-color: #dddddd63;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #000;
+            scroll-snap-align: start;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .section:nth-child(1) {
+            background-image: url(img/banner1.png);
+            object-fit: cover;
+        }
+
+        .section:nth-child(2) {
+            background-image: url(https://i.postimg.cc/wxfW0cwm/bg1.png);
+        }
+
+        .section:nth-child(3) {
+            background-image: url(https://i.postimg.cc/L8fN4d2t/bg3.jpg);
+        }
+
+        .section:nth-child(4) {
+            background-image: url(https://i.postimg.cc/KY2QR98d/bg4.jpg);
+        }
+
+        .section:nth-child(5) {
+            background-image: url(https://i.postimg.cc/g0HsRvwr/bg5.jpg);
+        }
+
+        .section .section-span {
+            font-size: 4.5rem;
+            font-weight: 650;
+            color: #000;
+            opacity: 0;
+            transform: scale(0);
+            text-transform: uppercase;
+        }
+
+        .section:nth-child(even) .section-span {
+            transform: translateX(100vw);
+        }
+
+        .section:nth-child(odd) .section-span {
+            transform: translateX(-100vw);
+        }
+
+        .section.active-sec .section-span {
+            transition: transform 1.5s ease;
+            transform: translateX(0) scale(1);
+            opacity: 1;
+        }
+
+        @media (max-width: 750px) {
+            body header .menu {
+                position: fixed;
+                top: 0;
+                left: -20rem;
+                width: 20rem;
+                height: 100vh;
+                flex-direction: column;
+                background-color: #222;
+                padding: 0;
+                padding-top: 3.5rem;
+                z-index: 99999;
+                overflow-y: auto;
+                transition: left 0.5s linear;
+            }
+
+            body header .menu-active {
+                left: 0;
+            }
+
+            header .menu-shadow {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: #000000b7;
+                backdrop-filter: blur(50px);
+            }
+
+            header .shadow-active {
+                display: block;
+            }
+
+            header .menu a {
+                text-align: center;
+                color: #fff;
+                height: 4rem;
+                margin: 10px 0;
+                cursor: pointer;
+                border-radius: 0;
+                transition: 0s;
+            }
+
+            header .menu a.active {
+                font-weight: 600;
+                background: crimson;
+                color: #fff;
+            }
+
+            header .menu a:hover {
+                background-color: crimson;
+                color: #fff;
+                font-weight: 600;
+            }
+
+            header .show-bar {
+                display: block;
+            }
+
+            header .hide-bar {
+                display: none;
+            }
+
+            header .menu .close-menu {
+                display: block;
+                position: absolute;
+                top: 1.2rem;
+                right: 30px;
+                padding: 0.5rem;
+                font-size: 1.5rem;
+                font-weight: 0;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            /* Slider container styling */
+            .slideshow-container {
+                max-width: 1000px;
+                position: relative;
+                margin: auto;
+                padding: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+
+            /* Dot styling for the service section */
+            .dot-container {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .dot {
+                height: 15px;
+                width: 15px;
+                margin: 0 5px;
+                background-color: #bbb;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            .active {
+                background-color: #717171;
+            }
+
+            /* Text styling inside slides */
+            .text {
+                color: #f2f2f2;
+                font-size: 18px;
+                padding: 10px;
+                position: absolute;
+                bottom: 30px;
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+        /* Container styles */
+        .container {
+            display: flex;
+            /* Enable Flexbox for the container */
+            justify-content: center;
+            /* Center items horizontally */
+            align-items: stretch;
+            /* Stretch items to the same height */
+            gap: 20px;
+            /* Space between items */
+            padding: 20px;
+            /* Padding around the container */
+        }
+
+        /* Item styles */
+        .items {
+            flex: 0 0 300px;
+            /* Fixed width for each item */
+            display: flex;
+            /* Enable Flexbox for each item */
+            flex-direction: column;
+            /* Arrange children in a column */
+            justify-content: flex-start;
+            /* Align content to the top */
+            text-align: center;
+            /* Center the text */
+            border: 1px solid #ccc;
+            /* Optional: border around items */
+            border-radius: 10px;
+            /* Optional: rounded corners */
+            background-color: #f9f9f9;
+            /* Optional: light background color */
+            padding: 15px;
+            /* Padding inside items */
+            height: 350px;
+            /* Fixed height for all items */
+        }
+
+        /* Image styles */
+        .item img {
+            max-width: 100%;
+            /* Ensure images do not exceed the width of their container */
+            height: auto;
+            /* Maintain aspect ratio of images */
+            border-radius: 10px;
+            /* Optional: rounded corners for images */
+            margin-bottom: 10px;
+            /* Space between image and text */
+        }
+
+        /* Title styles */
+        .title {
+            font-size: 1.5em;
+            /* Larger font size for titles */
+            margin: 10px 0;
+            /* Margin above and below the title */
+            color: #333;
+            /* Dark color for title text */
+        }
+
+        /* Paragraph styles */
+        .para {
+            font-size: 1em;
+            /* Normal font size for paragraph text */
+            color: #666;
+            /* Lighter color for paragraph text */
+            overflow: hidden;
+            /* Hide overflow text */
+            display: block;
+            /* Ensure the paragraph takes the full width */
+        }
+
+        .title-service {
+            font-size: 1.3rem;
+        }
+
+        .para-service {
+            font-size: 0.6rem;
+        }
+
+        .container-contact {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .contact-us {
+
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-right: 30px;
+
+        }
+
+        .contact-us img {
+            width: 30px;
+            height: 30px;
+            mix-blend-mode: multiply;
+            margin-bottom: -20px;
+        }
+
+        .contact-us .contact {
+            font-weight: bold;
+            margin-top: 10px;
+            margin: 10px 40px;
+        }
+
+        .contact-us .address p {
+            font-size: 0.9rem;
+        }
+
+        .form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .form-group button {
+            padding: 10px;
+            background-color: #ff6000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #e55a00;
+        }
+
+        .title-contact {
+            text-align: center;
+            /* Centers the text horizontally */
+            display: flex;
+            justify-content: center;
+            /* Centers content horizontally in a flex container */
+            align-items: center;
+            /* Centers content vertically in a flex container */
+            height: 100%;
+            /* Make sure the height is set if needed */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="section" id="home">
+            <span class="section-span">Home</span>
+            <header id="header">
+                <a href="#" class="logo">Consultants' Guild</a>
+                <div class="menu">
+                    <a href="#home" class="active" onclick="closeMenu()">Home</a>
+                    <a href="#partners" onclick="closeMenu()">Our Partners</a>
+                    <a href="#service" onclick="closeMenu()">Service</a>
+
+                    <a href="#contactus" onclick="closeMenu()">Contact Us</a>
+                    <i class="fa fa-times close-menu" onclick="closeMenu()"></i>
+                </div>
+                <div class="menu-shadow" onclick="closeMenu()"></div>
+                <i class="fa fa-bars show-bar" onclick="openMenu()"></i>
+            </header>
+
+            <!-- Slideshow Section -->
+            <div class="box">
+                <div class="img-logo"><img src="img/logo.png" alt=""></div>
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <div class="text">
+                            <h1> Management & Business Consultancy. </h1>
+                        </div>
+                        <img src="https://i.postimg.cc/yYDL5gGr/bg2.jpg" style="width:100%">
+
+                    </div>
+                    <div class="mySlides fade">
+
+                        <img src="https://i.postimg.cc/yYDL5gGr/bg2.jpg" style="width:100%">
+                        <div class="text">
+                            <h1> Tax Advisory</h1>
+                        </div>
+                    </div>
+                    <div class="mySlides fade">
+
+                        <img src="https://i.postimg.cc/yYDL5gGr/bg2.jpg" style="width:100%">
+                        <div class="text">
+                            <h1> Book Keeping and Accounting</h1>
+                        </div>
+                    </div>
+                    <div class="mySlides fade">
+
+                        <img src="https://i.postimg.cc/yYDL5gGr/bg2.jpg" style="width:100%">
+                        <div class="text">
+                            <h1> Policies, Procedures and Process
+                                Development Services</h1>
+                        </div>
+                    </div>
+                    <div class="mySlides fade">
+
+                        <img src="https://i.postimg.cc/yYDL5gGr/bg2.jpg" style="width:100%">
+                        <div class="text">
+                            <h1> IT Services</h1>
+                        </div>
+                    </div>
+                    <!-- Dot indicators at the bottom of the slideshow -->
+                    <div class="dot-container">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+                        <span class="dot" onclick="currentSlide(5)"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="section" id="partners">
+            <span class="section-span">About me</span>
+            <div class="container">
+                <div class="items">
+                    <div class="item">
+                        <img src="" alt="">
+                        <h1 class="title">Tahir Arshad</h1>
+                        <p class="para">Tahir Arshad has over 35 years
+                            of experience in the fields of
+                            accountancy, corporate culture and corporate finance.
+                            His main area of interest is
+                            corporate finance. He has
+                            vast experience in the areas of
+                            trade finance, long and shorterm borrowings, managing
+                            cash flows, etc. He enjoys extremely good relations with
+                            DFIs, Banks, and NBFIs</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <img src="" alt="">
+                        <h1 class="title">Shahid Kamal</h1>
+                        <p class="para">Shahid Kamal is a fellow member of the Chartered Institute
+                            of Management Accountants
+                            (formerly Institute of Cost &
+                            Management Accountants of
+                            Pakistan). He started his professional career from private
+                            sector and then shifted to
+                            public sector. He has served in
+                            PTCL and SNGPL for over 30
+                            years. He has vast experience
+                            of private and public sector
+                            organizations. His areas of interest are accounting and internal audit.</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <img src="" alt="">
+                        <h1 class="title">Syed M. Aamer</h1>
+                        <p class="para">Syed M. Aamer is a fellow
+                            member of Chartered Institute of Management Accountants (CIMA) formerly known
+                            as ICMAP. Aamer has experience of over 33 years in the
+                            accounts and finance disciplines. He has served in manufacturing setups of different
+                            sizes and magnitudes, starting from paper manufacturing to high level engineering
+                            setup. His areas of interest include accounting, book keeping, tax, ERP, SoPs, Planning,
+                            Budgeting, etc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="service">
+            <span class="section-span">Service</span>
+            <div class="container">
+                <div class="items">
+                    <div class="item">
+                        <h1 class="title-service">Management & Business Consultancy.</h1>
+                        <p class="para-service para">Our aim is to provide objective advice
+                            and assistance relating to the strategy,
+                            structure, management and operations of
+                            an organisation in pursuit of its long-term
+                            purposes and objectives. Our experience tells
+                            that many endeavors or projects fail or does
+                            not give the desired results due to hastily done
+                            planning, inappropriate departmental/ process
+                            structures and lack of proper management
+                            level supervision. We feel we can, based on our
+                            professional experience, advise managements
+                            on key features of their business strategies
+                            and plans focusing on long-range planning,
+                            reorganisation of a company’s structure, if
+                            considered necessary, and a general business
+                            appraisal of the company</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <h1 class="title-service">Tax Advisory</h1>
+                        <p class="para-service para">2. Tax Advisory
+                            It is said that success of a business depends
+                            on better tax planning and consideration of
+                            tax implications before business decisions
+                            are made. Keeping this in mind, we offer
+                            tax consultancy ranging from direct and
+                            indirect taxation of businesses to tax returns
+                            of individuals. Our tax services are supervised
+                            and managed by qualified and experienced
+                            people equipped with skills and knowledge
+                            in direct and indirect taxation. We assist our
+                            valuable clients in tax planning within the
+                            legal parameters and also provide planning
+                            and advising on strategizing tax implications.
+                            We believe in the highest standards of ethics
+                            including integrity, confidentiality, and
+                            professional behaviour.
+                        <ul style="font-size: 0.5rem;">
+                            <h2>Direct Taxation Services</h2>
+                            <li>Income Tax Advisory Services</li>
+                            <li>Income Tax Compliance Services</li>
+                            <li>E-filing of withholding tax and other statutory returns</li>
+                        </ul>
+                        <ul style="font-size: .5rem;">
+                            <h2>Indirect Taxation Services (Federal and Provincial)</h2>
+                            <li>Sales tax return review and advisory services</li>
+                            <li>Compliance of legal notices</li>
+                            <li>Provincial return and advisory services</li>
+                            <li>Monthly sales tax return</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <h1 class="title-service">Book Keeping and Accounting</h1>
+                        <p class="para-service para">Every business requires data on how it
+                            performed in a given period. This information
+                            helps businesses identify the problem areas
+                            and hence make necessary improvements.
+                            Book keeping and Accounting is the activity
+                            which provides this information and data. It
+                            also helps the taxation side as the same data is
+                            used to file returns etc.
+                            We offer businesses the opportunity to
+                            outsource, if they already have a department
+                            or function defined in their organisation, or
+                            rely on us and give us the responsibility of
+                            handling this important function for them.
+                            Businesses can benefit from computerized
+                            accounting setups. We have the knowledge as
+                            well as the ability to provide tailored softwares,
+                            if they so desire, or use off-the-shelf solutions.
+                            All you have to do is discuss with us, and we
+                            will suggest and provide the best suitable
+                            option for you. If you desire, we can handle the
+                            function for you so that you can focus on your
+                            business instead of worrying about ledgers,
+                            payrolls and bank reconciliations. </p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <h1 class="title-service">Policies, Procedures and Process Development Services</h1>
+                        <p class="para-service para">It’s a known fact that standardizing procedures
+                            and practices help avoiding wastage of
+                            precious time and money. Well defined
+                            procedures can help managements avoid
+                            duplications in work, mistakes which occur
+                            due to ignorance of how to handle a situation.
+                            It pays to have standard operating procedures
+                            defined and placed to make compliance of laws
+                            and instructions possible.Having manuals, like accounting manual,
+                            security manual etc gives the staff clear
+                            instructions on day to day operating activities.
+                            It reduces time wastages, we have often
+                            observed, in obtaining instructions or even
+                            deciding whom to approach to get instructions.
+                            Having well set procedures give independence
+                            to management to focus on more important
+                            aspects of businesses than worrying about day
+                            to day choirs</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <div class="item">
+                        <h1 class="title-service">Policies, Procedures and Process Development Services</h1>
+                        <p class="para-service para">It’s a known fact that standardizing procedures
+                            and practices help avoiding wastage of
+                            precious time and money. Well defined
+                            procedures can help managements avoid
+                            duplications in work, mistakes which occur
+                            due to ignorance of how to handle a situation.
+                            It pays to have standard operating procedures
+                            defined and placed to make compliance of laws
+                            and instructions possible.Having manuals, like accounting manual,
+                            security manual etc gives the staff clear
+                            instructions on day to day operating activities.
+                            It reduces time wastages, we have often
+                            observed, in obtaining instructions or even
+                            deciding whom to approach to get instructions.
+                            Having well set procedures give independence
+                            to management to focus on more important
+                            aspects of businesses than worrying about day
+                            to day choirs</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="section" id="contactus">
+            <span class="section-span">Contact Us</span>
+            <div class="container-contact">
+                <div class="contact-us">
+                    <img src="img/phone.jpg" alt="Phone Icon"
+                        style="width: 30px; height: 30px; mix-blend-mode: multiply;margin-bottom: -30px;">
+                    <div class="contact">
+                        <div class="title-contact">Phone</div>
+                        <div>+92 42 37135468</div>
+                        <div>+92 300 8419622</div>
+                    </div>
+                    <img src="img/mobile.png"
+                        style="width: 30px; height: 30px; mix-blend-mode: multiply;margin-bottom: -30px;" alt="">
+                    <div class="contact">
+                        <div class="title-contact">Mobile</div>
+                        <div>+92 333 5077732</div>
+                        <div>+92 302 8411213</div>
+                    </div>
+                    <img src="img/home.png"
+                        style="width: 30px; height: 30px; mix-blend-mode: multiply;margin-bottom: -30px;" alt="">
+                    <div class="contact">
+                        <div class="title-contact">Address</div>
+                        <p style="width: 100px; height: 100px; font-size: 0.6rem;    margin-left: 13px;">House no. 50,
+                            Sector C, Bankers
+                            Avenue
+                            Cooperative Housing Society, Bedian
+                            Road, Lahore</p>
+                    </div>
+                </div>
+
+
+                <form>
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 5000); // Change image every 2 seconds
+        }
+
+        function currentSlide(n) {
+            slideIndex = n - 1;
+            showSlides();
+        }
+
+        function plusSlides(n) {
+            slideIndex += n - 1;
+            showSlides();
+        }
+        // Function to change the active link
+        function setActiveLink(event) {
+            // Remove "active" class from all links
+            const links = document.querySelectorAll('.menu a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // Add "active" class to the clicked link
+            event.currentTarget.classList.add('active');
+        }
+
+        // Attach click event listeners to each menu link
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', setActiveLink);
+        });
+        // Function to add 'active' class based on current scroll position
+        function highlightSection() {
+            const sections = document.querySelectorAll('.section');
+            const menuLinks = document.querySelectorAll('.menu a');
+            let scrollPos = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach(section => {
+                const id = section.getAttribute('id');
+                const offsetTop = section.offsetTop;
+                const offsetHeight = section.offsetHeight;
+
+                if (scrollPos >= offsetTop && scrollPos <= offsetTop + offsetHeight) {
+                    menuLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', highlightSection);
+
+    </script>
+</body>
+
+
+</html>
