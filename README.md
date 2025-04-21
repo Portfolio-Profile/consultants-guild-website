@@ -12,9 +12,9 @@ A responsive website for a consultancy business, "Consultants' Guild," built wit
 
 ## Screenshots
 ![Home Section](ScreenShot/screenshot1.PNG)
-![Partners Section](ScreenShot/screenshot2.png)
-![Services Section](ScreenShot/screenshot3.png)
-![Contact Section](ScreenShot/screenshot4.png)
+![Partners Section](ScreenShot/screenshot2.PNG)
+![Services Section](ScreenShot/screenshot3.PNG)
+![Contact Section](ScreenShot/screenshot4.PNG)
 
 ## Tech Stack
 - **HTML5**: Semantic structure for sections and form.
