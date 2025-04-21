@@ -11,7 +11,7 @@ A responsive website for a consultancy business, "Consultants' Guild," built wit
 - **Smooth Animations**: Fade effects for slideshow and scroll-triggered section transitions.
 
 ## Screenshots
-![Home Section](ScreenShot/screenshot1.png)
+![Home Section](ScreenShot/screenshot1.PNG)
 ![Partners Section](ScreenShot/screenshot2.png)
 ![Services Section](ScreenShot/screenshot3.png)
 ![Contact Section](ScreenShot/screenshot4.png)
@@ -25,4 +25,4 @@ A responsive website for a consultancy business, "Consultants' Guild," built wit
 ## Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/consultants-guild-website.git
+   git clone https://github.com/Portfolio-Profile/consultants-guild-website.git
